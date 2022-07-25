@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore App/
+      run: dotnet restore PortfolioApp/
     - name: Build
-      run: dotnet build App/ --no-restore
+      run: dotnet build PortfolioApp/ --no-restore
     - name: Test
-      run: dotnet test App/ --no-build --verbosity normal
+      run: dotnet test PortfolioApp/ --no-build --verbosity normal
