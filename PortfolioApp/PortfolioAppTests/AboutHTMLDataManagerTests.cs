@@ -15,6 +15,24 @@ public class AboutHtmlDataManagerTests
         Assert.AreEqual(expectedData, actualData);
     }
 
+    [Test]
+    public void RequestAboutData_ReturnedHtmlDataEqualToExpected()
+    {
+        const string expectedHtmlData =
+            @"<div>
+                <h1>About Data</h1>
+
+                <li> 
+                    <a href=""#"">About Data</a> 
+                </li>
+            </div>";
+
+        IAboutDataProvider dataProvider = new FakeDataProvider(expectedHtmlData);
+        IAboutDataManager aboutDataManager = new AboutHtmlDataManager(dataProvider);
+        string actualData = aboutDataManager.RequestData();
+        Assert.AreEqual(expectedHtmlData, actualData);
+    }
+
     private class FakeDataProvider : IAboutDataProvider
     {
         private readonly string _data;
