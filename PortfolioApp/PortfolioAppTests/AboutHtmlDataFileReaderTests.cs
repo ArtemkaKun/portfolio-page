@@ -13,7 +13,7 @@ public class AboutHtmlDataFileReaderTests
         File.WriteAllText("testData.html", testAboutHtmlData);
         IAboutDataProvider aboutHtmlDataProvider = new AboutHtmlDataFileReader("testData.html");
         string aboutHtmlData = aboutHtmlDataProvider.GetData();
-        
+
         Assert.AreEqual(testAboutHtmlData, aboutHtmlData);
         File.Delete("testData.html");
     }
