@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioApp", "PortfolioApp\PortfolioApp.csproj", "{AF5B28BE-4069-4450-8689-8320465D4353}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioAppTests", "PortfolioAppTests\PortfolioAppTests.csproj", "{D7F8A182-C08B-4B65-BD45-FF8883943E8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioAppServer", "PortfolioAppServer\PortfolioAppServer.csproj", "{4011F5DC-CD81-444D-A7D8-ECD8907D60D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,13 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF5B28BE-4069-4450-8689-8320465D4353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF5B28BE-4069-4450-8689-8320465D4353}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF5B28BE-4069-4450-8689-8320465D4353}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF5B28BE-4069-4450-8689-8320465D4353}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7F8A182-C08B-4B65-BD45-FF8883943E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7F8A182-C08B-4B65-BD45-FF8883943E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7F8A182-C08B-4B65-BD45-FF8883943E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7F8A182-C08B-4B65-BD45-FF8883943E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4011F5DC-CD81-444D-A7D8-ECD8907D60D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4011F5DC-CD81-444D-A7D8-ECD8907D60D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4011F5DC-CD81-444D-A7D8-ECD8907D60D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4011F5DC-CD81-444D-A7D8-ECD8907D60D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

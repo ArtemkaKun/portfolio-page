@@ -1,4 +1,4 @@
-namespace PortfolioApp.AboutDataSystem;
+namespace PortfolioAppServer.AboutDataSystem;
 
 public class AboutHtmlDataManager : IAboutDataManager
 {

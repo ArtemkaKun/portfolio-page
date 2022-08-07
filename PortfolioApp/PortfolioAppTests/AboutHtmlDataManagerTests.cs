@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using PortfolioApp.AboutDataSystem;
+using PortfolioAppServer.AboutDataSystem;
 
 namespace PortfolioAppTests;
 
