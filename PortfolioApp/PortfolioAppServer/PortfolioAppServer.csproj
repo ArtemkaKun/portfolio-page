@@ -26,4 +26,12 @@
       <UseSystemResourceKeys>true</UseSystemResourceKeys>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\resources" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CompressedStaticFiles" Version="2.0.0" />
+    </ItemGroup>
+
 </Project>
