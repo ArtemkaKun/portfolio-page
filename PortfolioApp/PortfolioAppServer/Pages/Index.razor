@@ -1,7 +1,21 @@
 ﻿@page "/"
+@using PortfolioAppServer.AboutDataSystem
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Artem Yurchenko</PageTitle>
 
-<h1>Hello, world!</h1>
+@GetAboutHtmlContent()
 
-Welcome to your new app.
+@code
+{
+    private const string YourBrowserDoesNotSupportAVIFMessage = "(Hi. Your browser doesn't support avif format that I use on this page to save your time and internet traffic. Please, open the page in latest Google Chrome or Firefox browser)";
+
+    private static MarkupString GetAboutHtmlContent()
+    {
+        const string pathToAboutDataFile = "About.html";
+        IAboutDataProvider dataProvider = new AboutHtmlDataFileReader(pathToAboutDataFile);
+        string aboutHtmlData = new AboutHtmlDataManager(dataProvider).RequestData();
+        string aboutHtmlDataWithTemplates = aboutHtmlData.Replace($"@{nameof(YourBrowserDoesNotSupportAVIFMessage)}", YourBrowserDoesNotSupportAVIFMessage);
+        
+        return new MarkupString(aboutHtmlDataWithTemplates);
+    }
+}
