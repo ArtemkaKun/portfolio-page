@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using PortfolioAppServer.AboutDataSystem
+@using PortfolioAppServer.ProjectsDataSystem
 
 <PageTitle>Artem Yurchenko</PageTitle>
 
@@ -7,13 +8,16 @@
 
 <h2 id="experience-header">Experience</h2>
 
-<article>
-    <h4>[NDA] Custom subscription implementation (Unity + PlayFab)</h4>
-</article>
+@foreach (IProjectData projectData in GetProjectsData())
+{
+    <article>
+        <h4>@projectData.Name</h4>
+    </article>
+}
 
 @code
 {
-    private const string YourBrowserDoesNotSupportAVIFMessage = "(Hi. Your browser doesn't support avif format that I use on this page to save your time and internet traffic. Please, open the page in latest Google Chrome or Firefox browser)";
+        private const string YourBrowserDoesNotSupportAVIFMessage = "(Hi. Your browser doesn't support avif format that I use on this page to save your time and internet traffic. Please, open the page in latest Google Chrome or Firefox browser)";
 
     private static MarkupString GetAboutHtmlContent()
     {
@@ -21,7 +25,14 @@
         IAboutDataProvider dataProvider = new AboutHtmlDataFileReader(pathToAboutDataFile);
         string aboutHtmlData = new AboutHtmlDataManager(dataProvider).RequestData();
         string aboutHtmlDataWithTemplates = aboutHtmlData.Replace($"@{nameof(YourBrowserDoesNotSupportAVIFMessage)}", YourBrowserDoesNotSupportAVIFMessage);
-        
+
         return new MarkupString(aboutHtmlDataWithTemplates);
+    }
+
+    private static IReadOnlyList<IProjectData> GetProjectsData()
+    {
+        IProjectsDataStorage projectsDataStorage = new MongoDBProjectsDataStorage();
+
+        return projectsDataStorage.GetProjectsData();
     }
 }
