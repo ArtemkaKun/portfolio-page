@@ -2,7 +2,7 @@ namespace PortfolioAppServer.ProjectsDataSystem;
 
 public interface IProjectData
 {
-    public string GetName();
-    public IReadOnlyList<string> GetTags();
-    public string GetDescription();
+    public string Name { get; }
+    public IReadOnlyList<string> Tags { get; }
+    public string Description { get; }
 }
