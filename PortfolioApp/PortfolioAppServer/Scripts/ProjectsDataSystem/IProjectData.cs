@@ -1,4 +1,4 @@
-namespace PortfolioAppServer.Scripts.ProjectsDataSystem;
+namespace PortfolioAppServer.ProjectsDataSystem;
 
 public interface IProjectData
 {
