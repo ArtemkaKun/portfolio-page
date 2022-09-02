@@ -13,10 +13,12 @@
     <article>
         <h4 class="project-name">@projectData.Name</h4>
 
-        @foreach (string tag in projectData.Tags)
-        {
-            <span class="project-tag">@tag</span>
-        }
+        <div id="project-tags-container">
+            @foreach (string tag in projectData.Tags)
+            {
+                <span class="project-tag">@tag</span>
+            }
+        </div>
 
         @projectData.Description
     </article>
