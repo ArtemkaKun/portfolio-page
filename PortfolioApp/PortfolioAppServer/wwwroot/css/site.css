@@ -48,6 +48,12 @@ a, .btn-link {
     content: "An error has occurred."
 }
 
+.project-name {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #666;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
