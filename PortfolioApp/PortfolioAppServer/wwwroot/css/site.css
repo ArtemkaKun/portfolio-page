@@ -48,6 +48,20 @@ a, .btn-link {
     content: "An error has occurred."
 }
 
+.project-name {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #666;
+}
+
+.project-tag {
+    background-color: darkolivegreen;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -70,4 +84,8 @@ a, .btn-link {
 #experience-header {
     text-align: center;
     margin-bottom: 3%
+}
+
+#project-tags-container {
+    margin-bottom: 1rem;
 }

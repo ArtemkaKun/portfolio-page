@@ -11,7 +11,16 @@
 @foreach (IProjectData projectData in GetProjectsData())
 {
     <article>
-        <h4>@projectData.Name</h4>
+        <h4 class="project-name">@projectData.Name</h4>
+
+        <div id="project-tags-container">
+            @foreach (string tag in projectData.Tags)
+            {
+                <span class="project-tag">@tag</span>
+            }
+        </div>
+
+        @projectData.Description
     </article>
 }
 
