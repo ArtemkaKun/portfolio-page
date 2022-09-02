@@ -12,6 +12,13 @@
 {
     <article>
         <h4>@projectData.Name</h4>
+
+        @foreach (string tag in projectData.Tags)
+        {
+            <span class="project-tag">@tag</span>
+        }
+
+        @projectData.Description
     </article>
 }
 
