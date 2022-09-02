@@ -1,26 +1,15 @@
+using MongoDB.Driver;
+
 namespace PortfolioAppServer.ProjectsDataSystem;
 
 public class MongoDBProjectsDataStorage : IProjectsDataStorage
 {
     public IReadOnlyList<IProjectData> GetProjectsData()
     {
-        return new[]
-        {
-            new ProjectData
-            {
-                Name = "[NDA] Custom subscription implementation (Unity + PlayFab)",
+        IMongoClient mongoClient = new MongoClient(Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING"));
+        IMongoDatabase portfolioDB = mongoClient.GetDatabase(Environment.GetEnvironmentVariable("PROJECTS_DB_NAME"));
+        IMongoCollection<ProjectData> projectsCollection = portfolioDB.GetCollection<ProjectData>(Environment.GetEnvironmentVariable("PROJECTS_COLLECTION_NAME"));
 
-                Tags = new[]
-                {
-                    "Unity",
-                    "PlayFab",
-                    "C#",
-                    "JSON",
-                    "JS"
-                },
-
-                Description = "Custom subscription implementation for Unity game. It uses PlayFab as a backend. It's a part of a bigger project, so I can't show the code."
-            }
-        };
+        return projectsCollection.Find(_ => true).ToList();
     }
 }
