@@ -20,7 +20,15 @@
             }
         </div>
 
-        @projectData.Description
+        <p>@projectData.Description</p>
+
+        Achievements:
+        <ul>
+            @foreach (string achievement in projectData.Achievements)
+            {
+                <li>@achievement</li>
+            }
+        </ul>
     </article>
 }
 
