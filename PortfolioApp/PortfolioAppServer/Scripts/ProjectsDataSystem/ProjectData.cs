@@ -14,4 +14,6 @@ public record ProjectData : IProjectData
     public IReadOnlyList<string> Tags { get; init; } = null!;
     [BsonElement("Description")]
     public string Description { get; init; } = null!;
+    [BsonElement("Achievements")]
+    public IReadOnlyList<string> Achievements { get; init; } = null!;
 }
