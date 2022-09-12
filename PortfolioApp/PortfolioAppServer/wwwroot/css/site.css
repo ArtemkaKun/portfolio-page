@@ -56,10 +56,14 @@ a, .btn-link {
 
 .project-tag {
     background-color: darkolivegreen;
-    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem;
     font-size: 1.25rem;
-    padding: 0.25rem;
-    border-radius: 0.25rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    min-width: 2.5rem;
+    display: inline-block;
 }
 
 #blazor-error-ui {
