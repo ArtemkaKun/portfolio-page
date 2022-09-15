@@ -97,3 +97,7 @@ a, .btn-link {
 #project-tags-container {
     margin-bottom: 1rem;
 }
+
+#download-buttons-container {
+    text-align: center;
+}
