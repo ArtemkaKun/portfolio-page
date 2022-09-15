@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using PortfolioAppServer.AboutDataSystem
 @using PortfolioAppServer.ProjectsDataSystem
+@inject IJSRuntime JS
 
 <PageTitle>Artem Yurchenko</PageTitle>
 
@@ -34,7 +35,8 @@
 
 @code
 {
-        private const string YourBrowserDoesNotSupportAVIFMessage = "(Hi. Your browser doesn't support avif format that I use on this page to save your time and internet traffic. Please, open the page in latest Google Chrome or Firefox browser)";
+    private const string YourBrowserDoesNotSupportAVIFMessage = "(Hi. Your browser doesn't support avif format that I use on this page to save your time and internet traffic. Please, open the page in latest Google Chrome or Firefox browser)";
+    private const string CvFileName = "ArtemYurchenkoCV.pdf";
 
     private static MarkupString GetAboutHtmlContent()
     {
@@ -51,5 +53,18 @@
         IProjectsDataStorage projectsDataStorage = new MongoDBProjectsDataStorage();
 
         return projectsDataStorage.GetProjectsData();
+    }
+
+    private Stream GetFileStream()
+    {
+        return File.OpenRead(CvFileName);
+    }
+
+    private async Task DownloadCVFile()
+    {
+        var fileStream = GetFileStream();
+        using var streamRef = new DotNetStreamReference(stream: fileStream);
+
+        await JS.InvokeVoidAsync("downloadFileFromStream", CvFileName, streamRef);
     }
 }
