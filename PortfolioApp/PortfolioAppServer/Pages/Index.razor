@@ -38,7 +38,8 @@
 
 @code
 {
-        private const string CvFileName = "ArtemYurchenkoCV.pdf";
+    private const string CvFileName = "ArtemYurchenkoCV.pdf";
+    private const string ExperienceFileName = "ArtemYurchenkoExperience.pdf";
 
     private static MarkupString GetAboutHtmlContent()
     {
@@ -56,16 +57,20 @@
         return projectsDataStorage.GetProjectsData();
     }
 
-    private Stream GetFileStream()
-    {
-        return File.OpenRead(CvFileName);
-    }
-
     private async Task DownloadCVFile()
     {
-        var fileStream = GetFileStream();
-        using var streamRef = new DotNetStreamReference(stream: fileStream);
+        FileStream fileStream = File.OpenRead(CvFileName);
+        using DotNetStreamReference streamRef = new DotNetStreamReference(fileStream);
 
         await JS.InvokeVoidAsync("downloadFileFromStream", CvFileName, streamRef);
+    }
+    
+    private async Task DownloadExperienceFile()
+    {
+        byte[] randomBinaryData = new byte[50 * 1024];
+        MemoryStream fileStream = new MemoryStream(randomBinaryData);
+        using DotNetStreamReference streamRef = new DotNetStreamReference(fileStream);
+
+        await JS.InvokeVoidAsync("downloadFileFromStream", ExperienceFileName, streamRef);
     }
 }
