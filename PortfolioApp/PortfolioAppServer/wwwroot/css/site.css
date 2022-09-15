@@ -66,6 +66,10 @@ a, .btn-link {
     display: inline-block;
 }
 
+.author-mention-link {
+    text-align: center;
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
