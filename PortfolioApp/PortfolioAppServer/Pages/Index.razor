@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using PortfolioAppServer.AboutDataSystem
 @using PortfolioAppServer.ProjectsDataSystem
+@using DinkToPdf
+@using System.Text
 @inject IJSRuntime JS
 
 <PageTitle>Artem Yurchenko</PageTitle>
@@ -88,10 +90,77 @@
 
     private async Task DownloadExperienceFile()
     {
-        byte[] randomBinaryData = new byte[50 * 1024];
-        MemoryStream fileStream = new MemoryStream(randomBinaryData);
-        using DotNetStreamReference streamRef = new DotNetStreamReference(fileStream);
+        BasicConverter converter = new(new PdfTools());
 
+        StringBuilder htmlStringBuilder = new();
+
+        htmlStringBuilder.Append("<style>");
+        htmlStringBuilder.Append(await File.ReadAllTextAsync("wwwroot/css/bootstrap/bootstrap.min.css"));
+        htmlStringBuilder.Append("</style>");
+
+        htmlStringBuilder.Append("<style>");
+        htmlStringBuilder.Append(await File.ReadAllTextAsync("wwwroot/css/Simple.css"));
+        htmlStringBuilder.Append("</style>");
+
+        htmlStringBuilder.Append("<style>");
+        htmlStringBuilder.Append(await File.ReadAllTextAsync("wwwroot/css/site.css"));
+        htmlStringBuilder.Append("</style>");
+        
+        htmlStringBuilder.Append("<style>");
+        htmlStringBuilder.Append(".project-tag {color : white;}");
+        htmlStringBuilder.Append("</style>");
+
+        htmlStringBuilder.Append("<h2>Experience</h2>");
+        htmlStringBuilder.Append("<body>");
+
+        foreach (IProjectData projectData in GetProjectsData())
+        {
+            htmlStringBuilder.Append($"<article><h4 class='project-name'>{projectData.Name}</h4>");
+
+            foreach (string tag in projectData.Tags)
+            {
+                htmlStringBuilder.Append($@"<span class='project-tag'>{tag}</span>");
+            }
+
+            htmlStringBuilder.Append($"<p>{projectData.Description}</p>");
+
+            htmlStringBuilder.Append("Achievements:");
+            htmlStringBuilder.Append("<ul>");
+
+            foreach (string achievement in projectData.Achievements)
+            {
+                htmlStringBuilder.Append($"<li>{achievement}</li>");
+            }
+
+            htmlStringBuilder.Append("</ul> </article>");
+            htmlStringBuilder.Append("</body>");
+        }
+
+        HtmlToPdfDocument doc = new()
+        {
+            GlobalSettings =
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4
+            },
+            Objects =
+            {
+                new ObjectSettings
+                {
+                    PagesCount = true,
+                    HtmlContent = htmlStringBuilder.ToString(),
+                    WebSettings =
+                    {
+                        DefaultEncoding = "utf-8"
+                    }
+                }
+            }
+        };
+
+        byte[] pdf = converter.Convert(doc);
+        using MemoryStream pdfFileStream = new(pdf);
+        using DotNetStreamReference streamRef = new(pdfFileStream);
         await JS.InvokeVoidAsync("downloadFileFromStream", ExperienceFileName, streamRef);
     }
 }
