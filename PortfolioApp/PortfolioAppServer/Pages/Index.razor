@@ -5,6 +5,18 @@
 
 <PageTitle>Artem Yurchenko</PageTitle>
 
+@GetAboutHeaderHtmlContent()
+
+<span id="download-buttons-container">
+    <button @onclick="DownloadCVFile" title="Download CV">
+        <img class="small-icon" src="resources/icons/avif/cv.avif" alt="Download CV"/>
+    </button>
+
+    <button @onclick="DownloadExperienceFile" title="Download the 'Experience' section as PDF">
+        <img class="small-icon" src="resources/icons/avif/document.avif" alt="Download the 'Experience' section as PDF"/>
+    </button>
+</span>
+
 @GetAboutHtmlContent()
 
 <h2 id="experience-header">Experience</h2>
@@ -38,10 +50,19 @@
 
 @code
 {
-    private const string CvFileName = "ArtemYurchenkoCV.pdf";
-    private const string ExperienceFileName = "ArtemYurchenkoExperience.pdf";
+        private const string CvFileName = "ArtemYurchenkoCV.pdf";
+        private const string ExperienceFileName = "ArtemYurchenkoExperience.pdf";
 
-    private static MarkupString GetAboutHtmlContent()
+    private MarkupString GetAboutHeaderHtmlContent()
+    {
+        const string pathToAboutDataFile = "AboutHeader.html";
+        IAboutDataProvider dataProvider = new AboutHtmlDataFileReader(pathToAboutDataFile);
+        string aboutHtmlData = new AboutHtmlDataManager(dataProvider).RequestData();
+
+        return new MarkupString(aboutHtmlData);
+    }
+
+    private MarkupString GetAboutHtmlContent()
     {
         const string pathToAboutDataFile = "About.html";
         IAboutDataProvider dataProvider = new AboutHtmlDataFileReader(pathToAboutDataFile);
@@ -64,7 +85,7 @@
 
         await JS.InvokeVoidAsync("downloadFileFromStream", CvFileName, streamRef);
     }
-    
+
     private async Task DownloadExperienceFile()
     {
         byte[] randomBinaryData = new byte[50 * 1024];
