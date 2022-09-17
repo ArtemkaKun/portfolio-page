@@ -68,7 +68,7 @@ body {
     font-size: 1.15rem;
     line-height: 1.5;
     display: grid;
-    grid-template-columns: 1fr min(40%, 90%) 1fr;
+    grid-template-columns: 1fr min(45rem, 90%) 1fr;
     margin: 0;
 }
 body > * {
@@ -356,11 +356,11 @@ summary {
     word-break: break-all;
 }
 
-details[open] summary + * {
+details[open] > summary + * {
     margin-top: 0;
 }
 
-details[open] summary {
+details[open] > summary {
     margin-bottom: 0.5rem;
 }
 
@@ -547,18 +547,8 @@ cite {
     font-style: normal;
 }
 
-dl {
-    display: grid;
-    grid-template-columns: auto 1fr;
-}
-
-dl dt {
-    grid-column-start: 1;
+dt {
     color: var(--text-light);
-}
-
-dl dd {
-    grid-column-start: 2;
 }
 
 /* Use mono font for code elements */
