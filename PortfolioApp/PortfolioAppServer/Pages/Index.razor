@@ -3,6 +3,7 @@
 @using PortfolioAppServer.ProjectsDataSystem
 @using DinkToPdf
 @using System.Text
+@using PortfolioAppServer.Scripts
 @inject IJSRuntime JS
 
 <PageTitle>Artem Yurchenko</PageTitle>
@@ -90,22 +91,20 @@
 
     private async Task DownloadExperienceFile()
     {
-        BasicConverter converter = new(new PdfTools());
-
         StringBuilder htmlStringBuilder = new();
 
         htmlStringBuilder.Append("<style>");
-        htmlStringBuilder.Append(await File.ReadAllTextAsync("wwwroot/css/bootstrap/bootstrap.min.css"));
+        htmlStringBuilder.Append(File.ReadAllText("wwwroot/css/bootstrap/bootstrap.min.css"));
         htmlStringBuilder.Append("</style>");
 
         htmlStringBuilder.Append("<style>");
-        htmlStringBuilder.Append(await File.ReadAllTextAsync("wwwroot/css/Simple.css"));
+        htmlStringBuilder.Append(File.ReadAllText("wwwroot/css/Simple.css"));
         htmlStringBuilder.Append("</style>");
 
         htmlStringBuilder.Append("<style>");
-        htmlStringBuilder.Append(await File.ReadAllTextAsync("wwwroot/css/site.css"));
+        htmlStringBuilder.Append(File.ReadAllText("wwwroot/css/site.css"));
         htmlStringBuilder.Append("</style>");
-        
+
         htmlStringBuilder.Append("<style>");
         htmlStringBuilder.Append(".project-tag {color : white;}");
         htmlStringBuilder.Append("</style>");
@@ -158,7 +157,7 @@
             }
         };
 
-        byte[] pdf = converter.Convert(doc);
+        byte[] pdf = StaticPdfConverter.Converter.Convert(doc);
         using MemoryStream pdfFileStream = new(pdf);
         using DotNetStreamReference streamRef = new(pdfFileStream);
         await JS.InvokeVoidAsync("downloadFileFromStream", ExperienceFileName, streamRef);
